@@ -1,1 +1,1 @@
-It is Bus Inquiry's API I put it on Render.
+It is Bus Inquiry's API and I put it on Render.
