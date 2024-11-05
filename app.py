@@ -13,7 +13,9 @@ def routesName():
     routes_name = util.get_routes_name()
     return {"routes_name": routes_name}
 
-
+@app.route("/", methods=["HEAD","OPTIONS"])  
+def index() -> Response:
+    return Response("OK", 200)
 @app.route("/api/routeStationsName", methods=["POST"])
 def routeStationsName():
     route_name = str(escape(request.json["route_name"])).strip()
