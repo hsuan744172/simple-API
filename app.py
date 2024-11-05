@@ -1,5 +1,5 @@
 from html import escape
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_cors import CORS
 
 import src.util as util
@@ -16,6 +16,7 @@ def routesName():
 @app.route("/", methods=["HEAD","OPTIONS"])  
 def index() -> Response:
     return Response("OK", 200)
+
 @app.route("/api/routeStationsName", methods=["POST"])
 def routeStationsName():
     route_name = str(escape(request.json["route_name"])).strip()
