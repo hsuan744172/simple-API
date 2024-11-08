@@ -15,11 +15,11 @@ def routesName():
 
 @app.route("/", methods=["HEAD","OPTIONS"])  
 def index() -> Response:
-    return Response("OK", 200)
+    return Response("OK", status=200)
 
 @app.route("/api/routeStationsName", methods=["POST"])
 def routeStationsName():
-    route_name = str(escape(request.json["route_name"])).strip()
+    route_name = str(util.escape_html(request.json["route_name"])).strip()
     go = bool(request.json["go"])
     stations_name = util.get_stations_name(route_name, go)
     
@@ -28,8 +28,8 @@ def routeStationsName():
 
 @app.route("/api/routeStationRemainTime", methods=["POST"])
 def routeStationRemainTime():
-    route_name = str(escape(request.json["route_name"])).strip()
-    station_name = str(escape(request.json["station_name"])).strip()
+    route_name = str(util.escape_html(request.json["route_name"])).strip()
+    station_name = str(util.escape_html(request.json["station_name"])).strip()
     go = bool(request.json["go"])
     remain_time = util.get_remain_time(route_name, station_name, go)
     
@@ -40,7 +40,7 @@ def routeStationRemainTime():
 def routeStationsRemainTime():
     route_name = str(escape(request.json["route_name"])).strip()
     go = bool(request.json["go"])
-    remain_times = util.get_all_station_time(route_name, go)
-    remain_times = [{'name': k, 'time': v} for k, v in remain_times.items() if v is not None]
+    remain_times_dict = util.get_all_station_time(route_name, go)
+    remain_times_list = [{'name': k, 'time': v} for k, v in remain_times_dict.items() if v is not None]
     
-    return {"remain_times": remain_times}  
+    return {"remain_times": remain_times_list}  
