@@ -24,4 +24,4 @@ ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # 運行應用程式
-CMD [ "flask", "run"]
+CMD [ "poetry", "run","flask", "run"]
