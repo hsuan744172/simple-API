@@ -19,7 +19,7 @@ def index() -> Response:
 
 @app.route("/api/routeStationsName", methods=["POST"])
 def routeStationsName():
-    route_name = str(util.escape_html(request.json["route_name"])).strip()
+    route_name = str(escape(request.json["route_name"])).strip()
     go = bool(request.json["go"])
     stations_name = util.get_stations_name(route_name, go)
     
@@ -28,8 +28,8 @@ def routeStationsName():
 
 @app.route("/api/routeStationRemainTime", methods=["POST"])
 def routeStationRemainTime():
-    route_name = str(util.escape_html(request.json["route_name"])).strip()
-    station_name = str(util.escape_html(request.json["station_name"])).strip()
+    route_name = str(escape(request.json["route_name"])).strip()
+    station_name = str(escape(request.json["station_name"])).strip()
     go = bool(request.json["go"])
     remain_time = util.get_remain_time(route_name, station_name, go)
     
